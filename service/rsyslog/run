@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+
+# "-n" avoid's auto-backgrounding of the process.
+exec rsyslogd -n

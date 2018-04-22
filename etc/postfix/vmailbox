@@ -1,0 +1,19 @@
+# For your domain you should at least accept mails for this addresses
+# and forward it to a valid user in your organization:
+abuse@domain.tld na
+postmaster@domain.tld na
+webmaster@domain.tld na
+hostmaster@domain.tld na
+
+# Next you can specify individual users e.g. As with the users 
+# above make sure that the destination host accepts mails for this
+# users e.g. by creating the needed user accounts. For my Archiveopteryx
+# server I've to create a account via "aox add user ..." command e.g.
+user.name@domain.tld na
+
+# This is a "catch all" entry which accepts mails for basically
+# everything. But I strongly discourage NOT to use it. E.g. if you
+# accept all mails even for accounts that don't exist you'll make
+# spammers very happy and may generate a lot of additional mail
+# traffic for undelivered mail at least ;-) 
+@domain.tld na

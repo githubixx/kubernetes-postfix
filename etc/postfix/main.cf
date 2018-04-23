@@ -100,6 +100,7 @@ virtual_mailbox_domains = domain.tld anotherdomain.tld
 # of my PeerVPN addresses. As Postfix pod runs as a DaemonSet it has access to the
 # PeerVPN network and can connect to the LMTP port of Archiveopteryx to 
 # finally deliver the mail addressed to one of the user of the virtual domains.
+# Replace www.xxx.yyy.zzz with the IP address of your LMTP server of course!
 virtual_transport = lmtp:inet:www.xxx.yyy.zzz:2026
 
 # Virtual user map. The script "service/postfix/run" will create a hash map
@@ -177,7 +178,11 @@ smtpd_helo_required = yes
 # a client RCPT TO command, after smtpd_relay_restrictions. With "permit_mynetworks"
 # we allow hosts we defined in "$mynetworks" above to relay mail through this 
 # mailserver. The "reject_rbl_*/reject_rhsbl_*" directives specifies a few 
-# blacklists with served me very well over the last years to filter spam mail.
+# blacklists with served me very well over the last years to filter spam mail
+# (actually they work so good that I don't use any spam filter besides
+# Thunderbird's spam filter for the very few spam mails that get's through).
+# For "reject_unauth_destination" see
+# http://www.postfix.org/postconf.5.html#reject_unauth_destination
 smtpd_recipient_restrictions =
 	permit_mynetworks,
 	reject_rbl_client ix.dnsbl.manitu.net,

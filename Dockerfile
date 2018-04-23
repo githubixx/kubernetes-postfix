@@ -12,7 +12,7 @@ RUN apk add --no-cache \
 
 COPY service /etc/service
 COPY runit_bootstrap /usr/sbin/runit_bootstrap
-COPY rsyslog.conf /etc/rsyslog.conf
+COPY etc/rsyslog.conf /etc/rsyslog.conf
 
 STOPSIGNAL SIGKILL
 

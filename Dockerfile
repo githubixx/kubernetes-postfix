@@ -11,7 +11,7 @@ RUN apk add --no-cache \
   postfix-policyd-spf-perl
 
 COPY service /etc/service
-COPY runit_bootstrap /usr/sbin/runit_bootstrap
+COPY usr/sbin/runit_bootstrap /usr/sbin/runit_bootstrap
 COPY etc/rsyslog.conf /etc/rsyslog.conf
 
 STOPSIGNAL SIGKILL

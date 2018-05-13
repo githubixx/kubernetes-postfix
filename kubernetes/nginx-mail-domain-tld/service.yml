@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: nginx-mail-domain-tld
+  namespace: mailserver
+  labels:
+    app: nginx-mail-domain-tld
+spec:
+  selector:
+    app: nginx-mail-domain-tld
+  ports:
+  - name: http
+    port: 80

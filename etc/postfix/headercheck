@@ -1,0 +1,8 @@
+/^Subject: [a-zA-Z]+ Live-Chat/ REJECT
+/^Content-Type: text\/html; charset=koi8-r/ REJECT
+/^Content-Type: text\/plain; charset=koi8-r/ REJECT
+/.*KOI8-R.*/ REJECT
+/.*koi8-r.*/ REJECT
+/.*Pfizer.*/ REJECT
+/.*VIAGRA.*/ REJECT
+/.*Pharmacy.*/ REJECT

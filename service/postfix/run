@@ -16,7 +16,7 @@ newaliases
 # Run Postfix master process. Do not redirect stdin, stdout
 # or stderr to /dev/null, and do not discard the controlling
 # terminal (-d).
-exec /usr/lib/postfix/master -c /etc/postfix -d 2>&1
+exec /usr/libexec/postfix/master -c /etc/postfix -d 2>&1
 
 # Keep tail process running to pipe Postfix log to stdout.
 tail -F /var/log/mail.log

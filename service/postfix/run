@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 
+# Set myhostname
+SERVER_ID="${HOSTNAME//worker/}"
+sed "s/@ID@/${SERVER_ID}/g" /etc/postfix/main.cf.tmpl > /etc/postfix/main.cf
+
 # Create virtual mailbox database
 postmap /etc/postfix/vmailbox
 

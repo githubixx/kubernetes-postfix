@@ -45,7 +45,8 @@ mydestination = localhost localhost.localdomain
 # do it for you (which is the default). See the description of the
 # "mynetworks_style" parameter for more information.
 # We basically allow "localhost (127.0.0.1)" relaying mails. I additionally
-# allowed my PeerVPN hosts which are part of my 10.3.0.0/24 network.
+# allowed my VPN hosts which are part of my 10.3.0.0/24 network (that's
+# basically the network that all Kubernetes nodes belong to).
 mynetworks = 127.0.0.1/32 10.3.0.0/24
 
 # You MUST specify $myhostname at the start of the text. This is required

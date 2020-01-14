@@ -89,12 +89,12 @@ spec:
         - name: var-spool-postfix
           mountPath: /var/spool/postfix
         - name: certs
-          subPath: fullchain01.pem
-          mountPath: /etc/postfix/certs/fullchain01.pem
+          subPath: fullchain.pem
+          mountPath: /etc/postfix/certs/fullchain.pem
           readOnly: true
         - name: certs
-          subPath: privkey01.pem
-          mountPath: /etc/postfix/certs/privkey01.pem
+          subPath: privkey.pem
+          mountPath: /etc/postfix/certs/privkey.pem
           readOnly: true
         - name: dhparam
           subPath: dh512.pem

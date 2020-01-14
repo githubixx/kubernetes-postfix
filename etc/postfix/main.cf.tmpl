@@ -138,8 +138,8 @@ body_checks = regexp:/etc/postfix/bodycheck
 
 # Let's Encrypt certificate file (@ID@ is replaced during container startup)
 smtpd_tls_cert_file = /etc/postfix/certs/fullchain@ID@.pem
-# Let's Encrypt key file
-smtpd_tls_key_file  = /etc/postfix/certs/privkey@ID@.pem (@ID@ is replaced during container startup)
+# Let's Encrypt key file (@ID@ is replaced during container startup)
+smtpd_tls_key_file  = /etc/postfix/certs/privkey@ID@.pem
 # Sender MAY use TLS but we also accept unencrypted connections.
 smtpd_tls_security_level = may
 smtpd_tls_loglevel = 1

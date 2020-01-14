@@ -24,6 +24,7 @@ mydomain = domain.tld
 myorigin = domain.tld
 
 # "myhostname" should resolve to the IP of your mailserver.
+# (@ID@ is replaced during container startup)
 myhostname = mail@ID@.$mydomain
 
 # The list of domains that are delivered via the $local_transport
@@ -135,10 +136,10 @@ body_checks = regexp:/etc/postfix/bodycheck
 # Incoming TLS
 ###############################################################################
 
-# Let's Encrypt certificate file
-smtpd_tls_cert_file = /etc/postfix/certs/fullchain.pem
+# Let's Encrypt certificate file (@ID@ is replaced during container startup)
+smtpd_tls_cert_file = /etc/postfix/certs/fullchain@ID@.pem
 # Let's Encrypt key file
-smtpd_tls_key_file  = /etc/postfix/certs/privkey.pem
+smtpd_tls_key_file  = /etc/postfix/certs/privkey@ID@.pem (@ID@ is replaced during container startup)
 # Sender MAY use TLS but we also accept unencrypted connections.
 smtpd_tls_security_level = may
 smtpd_tls_loglevel = 1

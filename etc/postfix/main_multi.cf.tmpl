@@ -23,7 +23,8 @@ mydomain = domain.tld
 # $myhostname, is adequate for small sites. (default: $myhostname)
 myorigin = domain.tld
 
-# "myhostname" should resolve to the IP of your mailserver.
+# "myhostname" should resolve to the IP of your mailserver. In general that's
+# the Kubernetes worker node the Postfix container runs on.
 # (@ID@ is replaced during container startup)
 myhostname = mail@ID@.$mydomain
 

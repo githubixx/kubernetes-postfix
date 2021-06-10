@@ -25,7 +25,7 @@ myorigin = domain.tld
 
 # "myhostname" should resolve to the IP of your mailserver. In general that's
 # the Kubernetes worker node the Postfix container runs on.
-# (@ID@ is replaced during container startup)
+# @ID@ is replaced during container startup (see: service/postfix/run_multi)
 myhostname = mail@ID@.$mydomain
 
 # The list of domains that are delivered via the $local_transport

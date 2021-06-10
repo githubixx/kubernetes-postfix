@@ -1,9 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -e
 
-# Set myhostname
+# Set myhostname depending on the hostname the Postfix Pod runs on.
+# The ID gets extracted from the hostname.
 SERVER_ID="${HOSTNAME//worker/}"
-sed "s/@ID@/${SERVER_ID}/g" /etc/postfix/main.cf.tmpl > /etc/postfix/main.cf
+sed "s/@ID@/${SERVER_ID}/g" /etc/postfix/main_multi.cf.tmpl > /etc/postfix/main.cf
 
 # Create virtual mailbox database
 postmap /etc/postfix/vmailbox

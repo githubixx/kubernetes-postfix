@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -e
+
+# If there is a need to change the "main.cf" during Pod startup, tools
+# like "sed" can be used to change settings "on the fly". In this case
+# the "main.cf" template file is just copied as is.
+cp main_single.cf.tmpl /etc/postfix/main.cf
+
+# Create virtual mailbox database
+postmap /etc/postfix/vmailbox
+
+# The optional virtual(5) alias table rewrites recipient
+# addresses for all local, all virtual, and all remote  mail
+# destinations. This is unlike the aliases(5) table which
+# is used only for local(8) delivery.
+postmap /etc/postfix/virtual
+
+# Rebuild the mail aliases database, /etc/aliases, after a change.
+newaliases
+
+# Run Postfix master process. Do not redirect stdin, stdout
+# or stderr to /dev/null, and do not discard the controlling
+# terminal (-d).
+exec /usr/libexec/postfix/master -c /etc/postfix -d 2>&1
+
+# Keep tail process running to pipe Postfix log to stdout.
+tail -F /var/log/mail.log

@@ -16,8 +16,6 @@ spec:
       labels:
         app: postfix
     spec:
-      nodeSelector:
-        mailserver: 'true'
       serviceAccountName: postfix
       terminationGracePeriodSeconds: 30
       hostNetwork: true
@@ -38,10 +36,10 @@ spec:
           failureThreshold: 2
           tcpSocket:
             port: 25
-          periodSeconds: 5
+          periodSeconds: 60
         resources:
           requests:
-            memory: "64Mi"
+            memory: "32Mi"
             cpu: "50m"
           limits:
             memory: "64Mi"
@@ -54,7 +52,15 @@ spec:
           containerPort: 587
           hostPort: 587
         securityContext:
-          privileged: true
+          capabilities:
+            drop:
+            - ALL
+            add:
+            - DAC_OVERRIDE
+            - FOWNER
+            - SETUID
+            - SETGID
+            - NET_BIND_SERVICE
         volumeMounts:
         - name: config
           subPath: bodycheck

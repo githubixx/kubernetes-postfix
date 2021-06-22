@@ -23,8 +23,10 @@ mydomain = domain.tld
 # $myhostname, is adequate for small sites. (default: $myhostname)
 myorigin = domain.tld
 
-# "myhostname" should resolve to the IP of your mailserver.
-myhostname = mail.$mydomain
+# "myhostname" should resolve to the IP of your mailserver. In general that's
+# the Kubernetes worker node the Postfix container runs on.
+# @ID@ is replaced during container startup (see: service/postfix/run_multi)
+myhostname = mail@ID@.$mydomain
 
 # The list of domains that are delivered via the $local_transport
 # mail delivery transport. By default this is the Postfix local(8) delivery
@@ -45,7 +47,8 @@ mydestination = localhost localhost.localdomain
 # do it for you (which is the default). See the description of the
 # "mynetworks_style" parameter for more information.
 # We basically allow "localhost (127.0.0.1)" relaying mails. I additionally
-# allowed my PeerVPN hosts which are part of my 10.3.0.0/24 network.
+# allowed my VPN hosts which are part of my 10.3.0.0/24 network (that's
+# basically the network that all Kubernetes nodes belong to).
 mynetworks = 127.0.0.1/32 10.3.0.0/24
 
 # You MUST specify $myhostname at the start of the text. This is required
@@ -135,9 +138,9 @@ body_checks = regexp:/etc/postfix/bodycheck
 ###############################################################################
 
 # Let's Encrypt certificate file
-smtpd_tls_cert_file = /etc/postfix/certs/fullchain.pem
+smtpd_tls_cert_file = /etc/postfix/certs/tls.crt
 # Let's Encrypt key file
-smtpd_tls_key_file  = /etc/postfix/certs/privkey.pem
+smtpd_tls_key_file  = /etc/postfix/certs/tls.key
 # Sender MAY use TLS but we also accept unencrypted connections.
 smtpd_tls_security_level = may
 smtpd_tls_loglevel = 1

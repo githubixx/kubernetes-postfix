@@ -59,13 +59,13 @@ smtpd_banner = $myhostname ESMTP $mail_name (Commodore Amiga)
 # for syntax details. Adjust the file "etc/mail/aliases" which is 
 # included in my "kubernetes-postfix" Git repository accordingly.
 # Same is true for "$alias_database" (see next parameter).
-alias_maps = hash:/etc/mail/aliases
+alias_maps = lmdb:/etc/mail/aliases
 # The alias databases for local(8) delivery that are updated with "newaliases".
 # This is a separate configuration parameter because not all the tables
 # specified with "$alias_maps" have to be local files.
 # The script "service/postfix/run" which basically starts Postfix in the pod
 # run's "newaliases" command during startup.
-alias_database = hash:/etc/mail/aliases
+alias_database = lmdb:/etc/mail/aliases
 
 # The  maximal  size  of any local(8) individual mailbox or maildir file,
 # or zero (no limit).
@@ -106,15 +106,15 @@ virtual_mailbox_domains = domain.tld anotherdomain.tld
 # Replace www.xxx.yyy.zzz with the IP address of your LMTP server of course!
 virtual_transport = lmtp:inet:www.xxx.yyy.zzz:2026
 
-# Virtual user map. The script "service/postfix/run" will create a hash map
+# Virtual user map. The script "service/postfix/run" will create a map
 # of the virual users you specified here. See file "etc/postfix/vmailbox" as
 # an example and for more information. Basically you specify all users here
 # for which you want to receive mails line by line.
-virtual_mailbox_maps = hash:/etc/postfix/vmailbox
+virtual_mailbox_maps = lmdb:/etc/postfix/vmailbox
 
 # Optional lookup tables that alias specific mail addresses or domains to
 # other local or remote address.
-virtual_alias_maps = hash:/etc/postfix/virtual
+virtual_alias_maps = lmdb:/etc/postfix/virtual
 
 
 ###############################################################################
@@ -144,7 +144,7 @@ smtpd_tls_key_file  = /etc/postfix/certs/tls.key
 # Sender MAY use TLS but we also accept unencrypted connections.
 smtpd_tls_security_level = may
 smtpd_tls_loglevel = 1
-smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
+smtpd_tls_session_cache_database = lmdb:${data_directory}/smtpd_scache
 
 # Better forward secrecy settings. With prime-field EDH, OpenSSL wants the
 # server to provide two explicitly-selected (prime, generator) combinations.
@@ -163,7 +163,7 @@ smtpd_tls_dh512_param_file = ${config_directory}/dh512.pem
 # Postfix MAY use TLS encryption if destination supports it.
 smtp_tls_security_level = may
 smtp_tls_loglevel = 1
-smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+smtp_tls_session_cache_database = lmdb:${data_directory}/smtp_scache
 # A long list of all of trusted certificate authorities concatenated together.
 # This one is maintained by Alpine Linux but you can add your own if you want.
 smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt

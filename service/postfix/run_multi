@@ -7,13 +7,13 @@ SERVER_ID="${HOSTNAME//worker/}"
 sed "s/@ID@/${SERVER_ID}/g" /etc/postfix/main_multi.cf.tmpl > /etc/postfix/main.cf
 
 # Create virtual mailbox database
-postmap /etc/postfix/vmailbox
+postmap lmdb:/etc/postfix/vmailbox
 
 # The optional virtual(5) alias table rewrites recipient
 # addresses for all local, all virtual, and all remote  mail
 # destinations. This is unlike the aliases(5) table which
 # is used only for local(8) delivery.
-postmap /etc/postfix/virtual
+postmap lmdb:/etc/postfix/virtual
 
 # Rebuild the mail aliases database, /etc/aliases, after a change.
 newaliases

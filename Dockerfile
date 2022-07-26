@@ -15,6 +15,8 @@ COPY service /etc/service
 COPY usr/sbin/runit_bootstrap /usr/sbin/runit_bootstrap
 COPY etc/rsyslog.conf /etc/rsyslog.conf
 
+RUN ln -sf /dev/stdout /var/log/mail.log
+
 STOPSIGNAL SIGKILL
 
 ENTRYPOINT ["/usr/sbin/runit_bootstrap"]
